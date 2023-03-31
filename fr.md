@@ -112,3 +112,24 @@ return msg;</code><br>
 Ce code extrait le premier cookie stocké dans le tableau "set-cookie" du champ "msg.headers" et l'affecte au champ "msg.payload". Enfin, il renvoie l'objet "msg".
 
 Connectez le nœud "function" à un autre nœud "debug" pour afficher le cookie extrait.
+
+## Requête CURL
+
+Pour lancer une requête CURL sur Node-RED, vous pouvez utiliser le nœud "exec" de Node-RED. Ce nœud vous permet d'exécuter des commandes Shell, y compris des commandes CURL, directement depuis votre flux de travail Node-RED.
+
+Voici les étapes pour lancer une requête CURL sur Node-RED :
+
+Ajoutez un nœud "inject" à votre flux de travail pour déclencher la requête CURL.
+Connectez le nœud "inject" à un nœud "exec".
+Double-cliquez sur le nœud "exec" pour configurer la commande à exécuter. Entrez la commande CURL avec les options et les paramètres appropriés. Par exemple, pour effectuer une requête GET sur une URL donnée :
+<br>
+<code>curl -X GET https://api.example.com/data</code><br>
+Cliquez sur "Done" pour enregistrer la configuration du nœud "exec".
+Déployez votre flux de travail en cliquant sur le bouton "Deploy".
+Le nœud "exec" exécutera la commande CURL chaque fois que le nœud "inject" déclenche le flux de travail.<br><br>
+Vous pouvez également utiliser le nœud "http request" de Node-RED pour effectuer des requêtes HTTP à la place de CURL. Ce nœud est plus spécifique à l'envoi de requêtes HTTP et offre une interface de configuration plus conviviale pour les paramètres de la requête.
+
+
+
+
+
