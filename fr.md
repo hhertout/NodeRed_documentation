@@ -44,8 +44,7 @@ Voici les étapes pour créer une route API qui renvoie du JSON sur Node-RED :
     "name": "John Doe",
     "age": 30,
     "city": "Paris"
-};
-</code>
+};</code>
 
 - Enregistrer les données JSON dans le message pour une utilisation ultérieure
 <code>msg.payload = data;</code>
