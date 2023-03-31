@@ -155,6 +155,6 @@ Le nœud "exec" exécutera la commande CURL chaque fois que le nœud "inject" d�
 Vous pouvez également utiliser le nœud "http request" de Node-RED pour effectuer des requêtes HTTP à la place de CURL. Ce nœud est plus spécifique à l'envoi de requêtes HTTP et offre une interface de configuration plus conviviale pour les paramètres de la requête.
 
 
-
+## Subflow
 
 
