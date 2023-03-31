@@ -1,27 +1,28 @@
 # Documentation Node-Red (FR)
 
 ## Créer un environnement de développement Node-Red avec docker
-<code>docker run -it -p 1880:1880 -v node_red_data:/data --name mynodered nodered/node-red</code>
+Pour crée un environnement de développement Node-Red sous docker, il suffit de lancer cette commande: 
+- <code>docker run -it -p 1880:1880 -v node_red_data:/data --name mynodered nodered/node-red</code>
 
 Une fois le container lancer.
 Un volume est associé au container. Toutes les modifications seront correctement sauvegardées.<br>
-Allez sur <a href="http://localhost:1880/">http://localhost:1880/</a>
+- Allez sur <a href="http://localhost:1880/">http://localhost:1880/</a>
 
 ## Variables d'environnement
 
 Pour définir une variable d'environnement dans Node-RED, vous pouvez suivre les étapes suivantes :
 
-Ouvrez le fichier de configuration de votre projet Node-RED. Ce fichier est généralement situé dans le répertoire principal de votre projet et s'appelle settings.js.
+- Ouvrez le fichier de configuration de votre projet Node-RED. Ce fichier est généralement situé dans le répertoire principal de votre projet et s'appelle settings.js.
 
-Recherchez la section "Environment variable configuration" dans le fichier settings.js.
+- Recherchez la section "Environment variable configuration" dans le fichier settings.js.
 
-Dans cette section, vous pouvez définir des variables d'environnement en utilisant la syntaxe suivante :
+- Dans cette section, vous pouvez définir des variables d'environnement en utilisant la syntaxe suivante :
 
 
-<code>process.env.NOM_DE_LA_VARIABLE = 'valeur_de_la_variable';</code><br>
-Remplacez "NOM_DE_LA_VARIABLE" par le nom de votre variable d'environnement et "valeur_de_la_variable" par la valeur que vous souhaitez définir.
+- <code>process.env.NOM_DE_LA_VARIABLE = 'valeur_de_la_variable';</code><br>
+- Remplacez "NOM_DE_LA_VARIABLE" par le nom de votre variable d'environnement et "valeur_de_la_variable" par la valeur que vous souhaitez définir.
 
-Enregistrez les modifications apportées au fichier settings.js et redémarrez votre serveur Node-RED.
+- Enregistrez les modifications apportées au fichier settings.js et redémarrez votre serveur Node-RED.
 
 Vous pouvez accéder à la valeur de votre variable d'environnement à partir de n'importe quel nœud dans votre flow en utilisant la syntaxe suivante :
 
@@ -36,12 +37,9 @@ Pour créer une route API qui renvoie du JSON sur Node-RED, vous pouvez utiliser
 
 Voici les étapes pour créer une route API qui renvoie du JSON sur Node-RED :
 
-Ajoutez un nœud "HTTP In" à votre flux Node-RED et configurez-le pour écouter les requêtes HTTP entrantes sur un chemin d'URL spécifique (par exemple, "/api/data").
+- Ajoutez un nœud "HTTP In" à votre flux Node-RED et configurez-le pour écouter les requêtes HTTP entrantes sur un chemin d'URL spécifique (par exemple, "/api/data").
 
-Ajoutez un nœud "function" à votre flux Node-RED et connectez-le au nœud "HTTP In". Dans le nœud "function", utilisez le code JavaScript suivant pour générer les données JSON que vous souhaitez renvoyer :
-
-
-### Générer les données JSON
+- Ajoutez un nœud "function" à votre flux Node-RED et connectez-le au nœud "HTTP In". Dans le nœud "function", utilisez le code JavaScript suivant pour générer les données JSON que vous souhaitez renvoyer :
 <br><code>var data = {
     "name": "John Doe",
     "age": 30,
@@ -49,24 +47,21 @@ Ajoutez un nœud "function" à votre flux Node-RED et connectez-le au nœud "HTT
 };
 </code>
 
-### Enregistrer les données JSON dans le message pour une utilisation ultérieure
+- Enregistrer les données JSON dans le message pour une utilisation ultérieure
 <code>msg.payload = data;</code>
 
-### Passer le message au nœud suivant dans le flux Node-RED
+- Passer le message au nœud suivant dans le flux Node-RED
 <code>return msg;</code>
 Dans ce code, un objet JSON est créé en utilisant des paires clé-valeur pour les données que vous souhaitez renvoyer. Cet objet est ensuite enregistré dans le message Node-RED à l'aide de la propriété msg.payload pour une utilisation ultérieure.
 
-Ajoutez un nœud "HTTP Response" à votre flux Node-RED et connectez-le au nœud "function". Dans le nœud "HTTP Response", configurez le type de contenu de la réponse à "application/json" en utilisant la propriété "Content-Type" dans le champ "Headers", puis utilisez le code JavaScript suivant pour renvoyer les données JSON :
-
-
-### Récupérer les données JSON du message
+- Ajoutez un nœud "HTTP Response" à votre flux Node-RED et connectez-le au nœud "function". Dans le nœud "HTTP Response", configurez le type de contenu de la réponse à "application/json" en utilisant la propriété "Content-Type" dans le champ "Headers", puis utilisez le code JavaScript suivant pour renvoyer les données JSON :
 <br>
 <code>var data = msg.payload;
 </code>
 
-### Envoyer les données JSON dans la réponse HTTP
-msg.payload = JSON.stringify(data);
-return msg;
+- Envoyer les données JSON dans la réponse HTTP<br>
+<code>msg.payload = JSON.stringify(data);
+return msg;</code><br>
 Dans ce code, les données JSON enregistrées dans la propriété msg.payload sont récupérées et converties en chaîne JSON à l'aide de la fonction JSON.stringify(). Cette chaîne JSON est ensuite envoyée dans le corps de la réponse HTTP.
 
 Démarrez votre flux Node-RED, puis envoyez une requête HTTP à l'URL que vous avez configurée dans le nœud "HTTP In" (par exemple, "/api/data"). Le flux Node-RED doit générer les données JSON et les renvoyer dans une réponse HTTP avec le type de contenu "application/json".
@@ -79,9 +74,9 @@ Pour gérer une query string dynamique sur Node-RED, vous pouvez utiliser le nœ
 
 Voici un exemple de flux Node-RED qui récupère une query string dynamique et la manipule pour renvoyer une réponse HTTP en utilisant le nœud "HTTP Response" :
 
-Ajoutez un nœud "HTTP In" à votre flux Node-RED, puis configurez-le pour écouter les requêtes HTTP entrantes sur un chemin d'URL spécifique (par exemple, "/api").
+- Ajoutez un nœud "HTTP In" à votre flux Node-RED, puis configurez-le pour écouter les requêtes HTTP entrantes sur un chemin d'URL spécifique (par exemple, "/api").
 
-Ajoutez un nœud "function" à votre flux Node-RED, puis connectez-le au nœud "HTTP In". Dans le nœud "function", utilisez le code JavaScript suivant pour extraire la query string de la requête HTTP :
+- Ajoutez un nœud "function" à votre flux Node-RED, puis connectez-le au nœud "HTTP In". Dans le nœud "function", utilisez le code JavaScript suivant pour extraire la query string de la requête HTTP :
 
 ### Récupérer la query string de la requête HTTP
 <code>var queryString = msg.req._parsedUrl.query;</code>
@@ -118,19 +113,19 @@ Cet exemple montre comment vous pouvez utiliser le nœud "function" pour manipul
 
 Pour récupérer le cookie envoyé par la requête HTTP, vous pouvez utiliser le champ "msg.headers" dans Node-RED.
 
-Tout d'abord, assurez-vous que la réponse de l'API inclut un en-tête "Set-Cookie" avec une valeur de cookie valide. Vous pouvez le vérifier en utilisant un outil tel que Postman ou cURL.
+- Tout d'abord, assurez-vous que la réponse de l'API inclut un en-tête "Set-Cookie" avec une valeur de cookie valide. Vous pouvez le vérifier en utilisant un outil tel que Postman ou cURL.
 
-Dans le nœud "http request", cochez la case "Store cookies" dans l'onglet "Advanced". Cela permettra au nœud "http request" de stocker automatiquement les cookies renvoyés par l'API.
+- Dans le nœud "http request", cochez la case "Store cookies" dans l'onglet "Advanced". Cela permettra au nœud "http request" de stocker automatiquement les cookies renvoyés par l'API.
 
-Connectez le nœud "http request" à un nœud "debug" pour afficher la réponse.
+- Connectez le nœud "http request" à un nœud "debug" pour afficher la réponse.
 
-Dans le nœud "debug", cliquez sur "Configure" pour afficher les options avancées.
+- Dans le nœud "debug", cliquez sur "Configure" pour afficher les options avancées.
 
-Cochez la case "Output to console" pour afficher la sortie de débogage dans la console Node-RED.
+- Cochez la case "Output to console" pour afficher la sortie de débogage dans la console Node-RED.
 
-Ensuite, ajoutez un nœud "function" après le nœud "debug". Dans le champ "Function", saisissez le code suivant pour extraire le cookie :
+- Ensuite, ajoutez un nœud "function" après le nœud "debug". Dans le champ "Function", saisissez le code suivant pour extraire le cookie :
 
-<code>var cookie = msg.headers['set-cookie'][0];
+- <code>var cookie = msg.headers['set-cookie'][0];
 msg.payload = cookie;
 return msg;</code><br>
 
@@ -144,15 +139,27 @@ Pour lancer une requête CURL sur Node-RED, vous pouvez utiliser le nœud "exec"
 
 Voici les étapes pour lancer une requête CURL sur Node-RED :
 
-Ajoutez un nœud "inject" à votre flux de travail pour déclencher la requête CURL.
-Connectez le nœud "inject" à un nœud "exec".
-Double-cliquez sur le nœud "exec" pour configurer la commande à exécuter. Entrez la commande CURL avec les options et les paramètres appropriés. Par exemple, pour effectuer une requête GET sur une URL donnée :
-<br>
-<code>curl -X GET https://api.example.com/data</code><br>
-Cliquez sur "Done" pour enregistrer la configuration du nœud "exec".
-Déployez votre flux de travail en cliquant sur le bouton "Deploy".
+- Ajoutez un nœud "inject" à votre flux de travail pour déclencher la requête CURL.
+- Connectez le nœud "inject" à un nœud "exec".
+- Double-cliquez sur le nœud "exec" pour configurer la commande à exécuter. Entrez la commande CURL avec les options et les paramètres appropriés. Par exemple, pour effectuer une requête GET sur une URL donnée :
+- <code>curl -X GET https://api.example.com/data</code><br>
+- Cliquez sur "Done" pour enregistrer la configuration du nœud "exec".
+- Déployez votre flux de travail en cliquant sur le bouton "Deploy".
 Le nœud "exec" exécutera la commande CURL chaque fois que le nœud "inject" déclenche le flux de travail.<br><br>
 Vous pouvez également utiliser le nœud "http request" de Node-RED pour effectuer des requêtes HTTP à la place de CURL. Ce nœud est plus spécifique à l'envoi de requêtes HTTP et offre une interface de configuration plus conviviale pour les paramètres de la requête.
+
+## Subflow
+
+Un subflow est un type de nœud personnalisé dans Node-RED qui vous permet d'encapsuler un flux de travail dans un nœud réutilisable. Il vous permet de créer des blocs de fonctionnalités réutilisables que vous pouvez facilement inclure dans d'autres flux de travail.
+
+Voici comment créer un subflow dans Node-RED :
+
+- Cliquez sur l'icône "Menu" en haut à droite de l'interface utilisateur de Node-RED, puis cliquez sur "Subflow" puis sur "New Subflow".
+- Dans l'éditeur de subflow, ajoutez les nœuds que vous souhaitez inclure dans votre subflow. Vous pouvez ajouter des entrées et des sorties pour permettre la communication entre votre subflow et d'autres flux de travail.
+- Cliquez sur le bouton "Done" pour enregistrer votre subflow.
+Utilisez votre subflow dans un flux de travail en faisant glisser et déposer le nœud "Subflow" depuis l'onglet "Subflows" de la palette de nœuds et en le connectant à d'autres nœuds.
+
+Lorsque vous utilisez un subflow, les nœuds dans le subflow sont copiés dans le flux de travail parent, et toute modification apportée au subflow est répercutée sur toutes les instances du subflow. Cela permet d'encapsuler la logique de votre application et de la réutiliser facilement dans plusieurs flux de travail.
 
 
 
