@@ -3,7 +3,9 @@
 ## Créer un environnement de développement Node-Red avec docker
 <code>docker run -it -p 1880:1880 -v node_red_data:/data --name mynodered nodered/node-red</code>
 
-Une fois le container lancer. Allez sur <a href="http://localhost:1880/">http://localhost:1880/</a>
+Une fois le container lancer.
+Un volume est associé au container. Toutes les modifications seront correctement sauvegardées.<br>
+Allez sur <a href="http://localhost:1880/">http://localhost:1880/</a>
 
 ## Variables d'environnement
 
