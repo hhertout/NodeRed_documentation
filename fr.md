@@ -17,8 +17,7 @@ Ajoutez un nœud "function" à votre flux Node-RED et connectez-le au nœud "HTT
 
 
 ### Générer les données JSON
-<br><code>
-var data = {
+<br><code>var data = {
     "name": "John Doe",
     "age": 30,
     "city": "Paris"
@@ -37,8 +36,7 @@ Ajoutez un nœud "HTTP Response" à votre flux Node-RED et connectez-le au nœud
 
 ### Récupérer les données JSON du message
 <br>
-<code>
-var data = msg.payload;
+<code>var data = msg.payload;
 </code>
 
 ### Envoyer les données JSON dans la réponse HTTP
@@ -61,9 +59,7 @@ Ajoutez un nœud "HTTP In" à votre flux Node-RED, puis configurez-le pour écou
 Ajoutez un nœud "function" à votre flux Node-RED, puis connectez-le au nœud "HTTP In". Dans le nœud "function", utilisez le code JavaScript suivant pour extraire la query string de la requête HTTP :
 
 ### Récupérer la query string de la requête HTTP
-<code>
-var queryString = msg.req._parsedUrl.query;
-</code>
+<code>var queryString = msg.req._parsedUrl.query;</code>
 
 ### Afficher la query string dans les logs Node-RED
 <code>console.log("Query string : " + queryString);</code>
@@ -72,8 +68,7 @@ var queryString = msg.req._parsedUrl.query;
 <code>msg.queryString = queryString;</code>
 
 ### Passer le message au nœud suivant dans le flux Node-RED
-<code>return msg;
-</code><br>
+<code>return msg;</code><br>
 Dans ce code, la variable queryString est extraite de la requête HTTP entrante à l'aide de la propriété _parsedUrl.query de l'objet msg.req. Cette variable est ensuite enregistrée dans le message Node-RED à l'aide de la propriété msg.queryString pour une utilisation ultérieure.
 
 Ajoutez un nœud "HTTP Response" à votre flux Node-RED, puis connectez-le au nœud "function". Dans le nœud "HTTP Response", utilisez le code JavaScript suivant pour renvoyer une réponse HTTP contenant la query string extraite :
@@ -87,8 +82,7 @@ Ajoutez un nœud "HTTP Response" à votre flux Node-RED, puis connectez-le au n�
 
 ### Envoyer la réponse HTTP au client
 <code>msg.payload = responseBody;
-return msg;
-</code><br>
+return msg;</code><br>
 Dans ce code, la variable queryString est récupérée à partir de la propriété msg.queryString du message Node-RED. La réponse HTTP renvoyée contient la query string extraite dans le corps de la réponse.
 
 Démarrez votre flux Node-RED, puis envoyez une requête HTTP à l'URL que vous avez configurée dans le nœud "HTTP In", en incluant une query string dans l'URL (par exemple, "/api?param1=value1&param2=value2"). Le flux Node-RED doit extraire la query string de la requête HTTP entrante, la stocker dans le message Node-RED et renvoyer une réponse HTTP contenant la query string extraite.
@@ -111,11 +105,9 @@ Cochez la case "Output to console" pour afficher la sortie de débogage dans la 
 
 Ensuite, ajoutez un nœud "function" après le nœud "debug". Dans le champ "Function", saisissez le code suivant pour extraire le cookie :
 
-<code>
-var cookie = msg.headers['set-cookie'][0];
+<code>var cookie = msg.headers['set-cookie'][0];
 msg.payload = cookie;
-return msg;
-</code><br>
+return msg;</code><br>
 
 Ce code extrait le premier cookie stocké dans le tableau "set-cookie" du champ "msg.headers" et l'affecte au champ "msg.payload". Enfin, il renvoie l'objet "msg".
 
