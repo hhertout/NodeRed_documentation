@@ -5,6 +5,29 @@
 
 Une fois le container lancer. Allez sur <a href="http://localhost:1880/">http://localhost:1880/</a>
 
+## Variables d'environnement
+
+Pour définir une variable d'environnement dans Node-RED, vous pouvez suivre les étapes suivantes :
+
+Ouvrez le fichier de configuration de votre projet Node-RED. Ce fichier est généralement situé dans le répertoire principal de votre projet et s'appelle settings.js.
+
+Recherchez la section "Environment variable configuration" dans le fichier settings.js.
+
+Dans cette section, vous pouvez définir des variables d'environnement en utilisant la syntaxe suivante :
+
+
+<code>process.env.NOM_DE_LA_VARIABLE = 'valeur_de_la_variable';</code><br>
+Remplacez "NOM_DE_LA_VARIABLE" par le nom de votre variable d'environnement et "valeur_de_la_variable" par la valeur que vous souhaitez définir.
+
+Enregistrez les modifications apportées au fichier settings.js et redémarrez votre serveur Node-RED.
+
+Vous pouvez accéder à la valeur de votre variable d'environnement à partir de n'importe quel nœud dans votre flow en utilisant la syntaxe suivante :
+
+<code>process.env.NOM_DE_LA_VARIABLE</code><br>
+Remplacez "NOM_DE_LA_VARIABLE" par le nom de votre variable d'environnement.
+
+Il est important de noter que les variables d'environnement définies dans le fichier settings.js ne sont visibles que pour l'instance de Node-RED exécutant votre projet. Si vous avez besoin de définir des variables d'environnement pour l'ensemble du système, vous devez les définir dans le système d'exploitation sous-jacent.
+
 ## Créer une route API qui renvoie du JSON
 
 Pour créer une route API qui renvoie du JSON sur Node-RED, vous pouvez utiliser les nœuds "HTTP In", "function" et "HTTP Response".
